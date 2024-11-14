@@ -7,12 +7,18 @@
 
 #endif //UNTITLED1_TREE_H
 
-
+/* définition du type noeud*/
 typedef struct s_node{
     int value;
     int depth;
     struct s_node **sons;
     int nbSons
 }t_node;
+
+/* définition du type arbre*/
+typedef struct s_tree
+{
+    t_node *root ;
+} t_tree ;
 
 t_node *createNode(int val, int nb_sons, int depth);
