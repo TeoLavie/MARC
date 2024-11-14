@@ -15,3 +15,4 @@ typedef struct s_node{
     int nbSons
 }t_node;
 
+t_node *createNode(int val, int nb_sons, int depth);
