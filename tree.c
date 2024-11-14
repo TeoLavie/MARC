@@ -3,7 +3,7 @@
 //
 
 #include "tree.h"
-t_node *createNode(int val, int nb_sons)
+t_node *createNode(int val, int nb_sons, int depth)
 {
     t_node *new node;
     new_node = (t_node *)malloc(sizeof(t_node));
