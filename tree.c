@@ -19,3 +19,10 @@ t_node *createNode(int val, int nb_sons, int depth)
     }
     return new_node;
 }
+
+/**
+ void addNode(*Node_père,int node_wanted){
+    si Node_père existe pas alors Root vide alors Node deviens root
+    sinon Node=createNode(???,Node_père->nb_sons-1,Node_père->depth-1
+    *(Node_père->sons+node_wanted) = &Node
+ */
