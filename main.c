@@ -35,6 +35,7 @@ int main() {
     displayMap(map);
     t_tree t;
     t = createTree(0);
+    addNode(t.root);
     DisplayTree(t);
     return 0;
 }

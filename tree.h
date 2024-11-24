@@ -22,6 +22,7 @@ typedef struct s_tree
 } t_tree ;
 
 t_node *createNode(int, int, int );
+void addNode(t_node *);
 t_tree createTree(int );
 void DisplayTree(t_tree);
 void DisplayNode(t_node *);

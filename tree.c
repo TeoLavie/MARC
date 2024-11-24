@@ -40,10 +40,10 @@ void DisplayTree(t_tree t){
 }
 void DisplayNode(t_node *pn){
     int i = 0;
-    printf("[ %d ]");
+    printf("[ %d ]",pn->value);
     while(i < pn->nbSons){
         DisplayNode(pn->sons[i]);
-        i++;
+        i = i + 1;
     }
 }
 /**
