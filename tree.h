@@ -21,4 +21,7 @@ typedef struct s_tree
     t_node *root ;
 } t_tree ;
 
-t_node *createNode(int val, int nb_sons, int depth);
+t_node *createNode(int, int, int );
+t_tree createTree(int );
+void DisplayTree(t_tree);
+void DisplayNode(t_node *);

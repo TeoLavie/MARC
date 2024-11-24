@@ -4,6 +4,8 @@
 
 #include "tree.h"
 #include <stdlib.h>
+#include <stdio.h>
+
 
 t_node *createNode(int val, int nb_sons, int depth)
 {
@@ -20,6 +22,30 @@ t_node *createNode(int val, int nb_sons, int depth)
     return new_node;
 }
 
+void addNode(t_node *pn){
+    int i = 0;
+    while( i < pn->nbSons){
+        pn->sons[i] = createNode(10,pn->nbSons-1,pn->depth+1);
+        i++;
+    }
+}
+
+t_tree createTree(int val){
+    t_tree t;
+    t.root = createNode(val,9,0);
+    return t;
+}
+void DisplayTree(t_tree t){
+    DisplayNode(t.root);
+}
+void DisplayNode(t_node *pn){
+    int i = 0;
+    printf("[ %d ]");
+    while(i < pn->nbSons){
+        DisplayNode(pn->sons[i]);
+        i++;
+    }
+}
 /**
  void addNode(*Node_père,int node_wanted){
     si Node_père existe pas alors Root vide alors Node deviens root
