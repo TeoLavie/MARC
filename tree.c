@@ -42,7 +42,10 @@ void DisplayNode(t_node *pn){
     int i = 0;
     printf("[ %d ]",pn->value);
     while(i < pn->nbSons){
-        DisplayNode(pn->sons[i]);
+        if(pn->sons[i]!= NULL) {
+            DisplayNode(pn->sons[i]);
+        }
+        else{ printf("[]");}
         i = i + 1;
     }
 }

@@ -36,6 +36,7 @@ int main() {
     t_tree t;
     t = createTree(0);
     addNode(t.root);
+    addNode(t.root->sons[2]);
     DisplayTree(t);
     return 0;
 }
