@@ -4,7 +4,7 @@
 
 #include <stdlib.h>
 #include "moves.h"
-
+#include "map.h"
 /* prototypes of local functions */
 /* local functions are used only in this file, as helper functions */
 
@@ -182,4 +182,36 @@ t_move *getRandomMoves(int N)
         moves[i] = (t_move )type;
     }
     return moves;
+}
+
+
+int getValueInFront(t_localisation loc, t_map map) {
+    t_position pos_in_front = loc.pos; // Utilisation du membre `pos` pour accéder aux coordonnées
+
+    // Determine the position in front based on the rover's orientation
+    switch (loc.ori) {
+        case NORTH:
+            pos_in_front.y -= 1; // Déplacement vers le nord (y décroît)
+            break;
+        case EAST:
+            pos_in_front.x += 1; // Déplacement vers l'est (x croît)
+            break;
+        case SOUTH:
+            pos_in_front.y += 1; // Déplacement vers le sud (y croît)
+            break;
+        case WEST:
+            pos_in_front.x -= 1; // Déplacement vers l'ouest (x décroît)
+            break;
+        default:
+            return -1; // Orientation invalide
+    }
+
+    // Check if the position in front is within the bounds of the map
+    if (pos_in_front.x >= 0 && pos_in_front.x < map.x_max &&
+        pos_in_front.y >= 0 && pos_in_front.y < map.y_max) {
+        return map.soils[pos_in_front.y][pos_in_front.x];
+    }
+
+    // Return -1 if the position is out of bounds
+    return -1;
 }

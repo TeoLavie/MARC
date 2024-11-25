@@ -6,6 +6,7 @@
 #define UNTITLED1_MOVES_H
 
 #include "loc.h"
+#include "map.h"
 
 /**
  * @brief Array of strings for the possible moves of the robot
@@ -49,5 +50,6 @@ t_localisation move(t_localisation, t_move);
  * @return none
  */
 void updateLocalisation(t_localisation *, t_move);
+int getValueInFront(t_localisation, t_map);
 
 #endif //UNTITLED1_MOVES_H

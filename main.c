@@ -1,5 +1,7 @@
 #include <stdio.h>
+#include "moves.h"
 #include "map.h"
+
 
 int main() {
     t_map map;
@@ -32,5 +34,17 @@ int main() {
         printf("\n");
     }
     displayMap(map);
+
+    t_localisation loc = loc_init(0, 2, NORTH);
+
+    int value_in_front = getValueInFront(loc, map);
+    printf("Value in front of the rover: %d\n", value_in_front);
+
+
+
     return 0;
+
+
+
 }
+
