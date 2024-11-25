@@ -35,23 +35,30 @@ t_tree createTree(int val){
     t.root = createNode(val,9,0);
     return t;
 }
-void DisplayTree(t_tree t){
-    DisplayNode(t.root);
+void displayTree(t_tree t){
+    displayNode(t.root);
 }
-void DisplayNode(t_node *pn){
+void displayNode(t_node *pn){
     int i = 0;
     printf("[ %d ]",pn->value);
     while(i < pn->nbSons){
         if(pn->sons[i]!= NULL) {
-            DisplayNode(pn->sons[i]);
+            displayNode(pn->sons[i]);
         }
         else{ printf("[]");}
         i = i + 1;
     }
 }
+
 /**
- void addNode(*Node_père,int node_wanted){
-    si Node_père existe pas alors Root vide alors Node deviens root
-    sinon Node=createNode(???,Node_père->nb_sons-1,Node_père->depth-1
-    *(Node_père->sons+node_wanted) = &Node
- */
+ *
+ * @param action
+ * @return int valueAction(char action){
+        si action = Action voulu{
+            return valeur case affecté
+
+        si action = Action voulu ....
+        si action = Action voulu....
+ }
+
+**/
