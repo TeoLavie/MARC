@@ -22,6 +22,7 @@ t_node *createNode(int val, int nb_sons, int depth)
     return new_node;
 }
 
+
 void addNode(t_node *pn){
     int i = 0;
     while( i < pn->nbSons){
