@@ -35,10 +35,10 @@ int main() {
     }
     displayMap(map);
 
-    t_localisation loc = loc_init(0, 2, NORTH);
+    t_localisation loc = loc_init(4, 1, EAST);
 
     int value_in_front = getValueInFront(loc, map);
-    printf("Value in front of the rover: %d\n", value_in_front);
+    printf("Valeur devant le rover: %d\n", value_in_front);
 
 
 

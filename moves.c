@@ -186,32 +186,31 @@ t_move *getRandomMoves(int N)
 
 
 int getValueInFront(t_localisation loc, t_map map) {
-    t_position pos_in_front = loc.pos; // Utilisation du membre `pos` pour accéder aux coordonnées
+    t_position pos_in_front = loc.pos;
 
-    // Determine the position in front based on the rover's orientation
-    switch (loc.ori) {
-        case NORTH:
-            pos_in_front.y -= 1; // Déplacement vers le nord (y décroît)
-            break;
-        case EAST:
-            pos_in_front.x += 1; // Déplacement vers l'est (x croît)
-            break;
-        case SOUTH:
-            pos_in_front.y += 1; // Déplacement vers le sud (y croît)
-            break;
-        case WEST:
-            pos_in_front.x -= 1; // Déplacement vers l'ouest (x décroît)
-            break;
-        default:
-            return -1; // Orientation invalide
+    if(loc.ori == NORTH){
+        pos_in_front.y -= 1;
+    }
+    else if(loc.ori == EAST){
+        pos_in_front.x += 1;
+    }
+    else if(loc.ori == SOUTH){
+        pos_in_front.y += 1;
+    }
+    else if(loc.ori == WEST){
+        pos_in_front.x -= 1;
+    }
+    else {
+        return -1;
     }
 
-    // Check if the position in front is within the bounds of the map
+
+    // regarde si hors d la map
     if (pos_in_front.x >= 0 && pos_in_front.x < map.x_max &&
         pos_in_front.y >= 0 && pos_in_front.y < map.y_max) {
-        return map.soils[pos_in_front.y][pos_in_front.x];
+        return map.costs[pos_in_front.y][pos_in_front.x];
     }
 
-    // Return -1 if the position is out of bounds
+    // si hors -1
     return -1;
 }
