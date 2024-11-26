@@ -4,12 +4,14 @@
 
 #include "tree.h"
 #include "moves.h"
+#include "loc.h"
 #include <stdlib.h>
 #include <stdio.h>
 
 
 t_node *createNode(int val, int nb_sons, int depth,t_localisation loc)
 {
+    ///Créer un noeud
     t_node *new_node;
     new_node = (t_node *)malloc(sizeof(t_node));
     new_node->value = val;
@@ -26,27 +28,36 @@ t_node *createNode(int val, int nb_sons, int depth,t_localisation loc)
 
 
 void addNode(t_node *pn,t_map map){
+    //Fonction Add Node, créer un Noeud pour tous les fils du noeud en entrée
     int i = 0;
     t_move *m = getRandomMoves(pn->nbSons);
     while( i < pn->nbSons){
             t_localisation new_loc;
             new_loc = translate(pn->loc,m[i]);
-            int val = map.costs[new_loc.pos.x][new_loc.pos.y];
-            pn->sons[i] = createNode(val,pn->nbSons-1,pn->depth+1,new_loc);
+            if (isValidLocalisation(new_loc.pos,map.x_max,map.y_max)) {
+                int val = map.costs[new_loc.pos.y][new_loc.pos.x];
+                pn->sons[i] = createNode(val, pn->nbSons - 1, pn->depth + 1, new_loc);
+            }
+            else{
+                pn->sons[i] = createNode(1000000, pn->nbSons - 1, pn->depth + 1, new_loc);
+            }
             i++;
     }
 }
 
 t_tree createTree(int pos_x,int pos_y,t_orientation ori,t_map map){
+    //Creer la racine de l'arbre et l'initialise avec la bon noeud
     t_tree t;
     int val = map.costs[pos_x][pos_y];
     t.root = createNode(val,9,0, loc_init(pos_x,pos_y,ori));
     return t;
 }
 void displayTree(t_tree t){
+    //Fonction de test faisant un affichage très sommaire de l'arbre
     displayNode(t.root);
 }
 void displayNode(t_node *pn){
+    //Affiche tout les noeud enfant d'un noeud entré
     int i = 0;
     printf("[ %d ]",pn->value);
     while(i < pn->nbSons){
@@ -58,24 +69,14 @@ void displayNode(t_node *pn){
     }
 }
 
-void fillSons(t_node *pn,t_map map){
+void fillNodes(t_node *pn,t_map map){
+    ///rempli tous les noeuds enfants
     if(pn->nbSons !=0){
         addNode(pn,map);
         for(int i = 0;i < pn->nbSons ;i++){
-            addNode(pn->sons[i],map);
+            fillNodes(pn->sons[i],map);
         }
     }
 }
 
-/**
- *
- * @param action
- * @return int valueAction(char action){
-        si action = Action voulu{
-            return valeur case affecté
 
-        si action = Action voulu ....
-        si action = Action voulu....
- }
-
-**/

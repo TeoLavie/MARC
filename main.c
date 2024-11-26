@@ -33,16 +33,12 @@ int main() {
         }
         printf("\n");
     }
+    ///test du main
     displayMap(map);
-
-    t_localisation loc = loc_init(4, 1, EAST);
-
     t_tree t;
     t = createTree(0,0,SOUTH,map);
-    addNode(t.root,map);
-    displayTree(t);
-
-
+    addNode(t.root, map);
+    fillNodes(t.root,map);
     return 0;
 
 

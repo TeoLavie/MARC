@@ -28,3 +28,4 @@ void addNode(t_node *,t_map);
 t_tree createTree(int,int,t_orientation,t_map);
 void displayTree(t_tree);
 void displayNode(t_node *);
+void fillNodes(t_node*,t_map);

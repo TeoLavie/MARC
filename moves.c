@@ -185,32 +185,3 @@ t_move *getRandomMoves(int N)
 }
 
 
-int getValueInFront(t_localisation loc, t_map map) {
-    t_position pos_in_front = loc.pos;
-
-    if(loc.ori == NORTH){
-        pos_in_front.y -= 1;
-    }
-    else if(loc.ori == EAST){
-        pos_in_front.x += 1;
-    }
-    else if(loc.ori == SOUTH){
-        pos_in_front.y += 1;
-    }
-    else if(loc.ori == WEST){
-        pos_in_front.x -= 1;
-    }
-    else {
-        return -1;
-    }
-
-
-    // regarde si hors d la map
-    if (pos_in_front.x >= 0 && pos_in_front.x < map.x_max &&
-        pos_in_front.y >= 0 && pos_in_front.y < map.y_max) {
-        return map.costs[pos_in_front.y][pos_in_front.x];
-    }
-
-    // si hors -1
-    return -1;
-}
