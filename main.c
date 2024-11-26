@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "moves.h"
 #include "map.h"
-
+#include "tree.h"
 
 int main() {
     t_map map;
@@ -37,9 +37,10 @@ int main() {
 
     t_localisation loc = loc_init(4, 1, EAST);
 
-    int value_in_front = getValueInFront(loc, map);
-    printf("Valeur devant le rover: %d\n", value_in_front);
-
+    t_tree t;
+    t = createTree(0,0,SOUTH,map);
+    addNode(t.root,map);
+    displayTree(t);
 
 
     return 0;

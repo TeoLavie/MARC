@@ -3,11 +3,12 @@
 //
 
 #include "tree.h"
+#include "moves.h"
 #include <stdlib.h>
 #include <stdio.h>
 
 
-t_node *createNode(int val, int nb_sons, int depth)
+t_node *createNode(int val, int nb_sons, int depth,t_localisation loc)
 {
     t_node *new_node;
     new_node = (t_node *)malloc(sizeof(t_node));
@@ -15,6 +16,7 @@ t_node *createNode(int val, int nb_sons, int depth)
     new_node->nbSons = nb_sons;
     new_node->depth = depth;
     new_node->sons = (t_node **)malloc(nb_sons*sizeof(t_node *));
+    new_node->loc = loc;
     for (int i=0; i <nb_sons; i++)
     {
         new_node->sons[i]=NULL;
@@ -23,17 +25,22 @@ t_node *createNode(int val, int nb_sons, int depth)
 }
 
 
-void addNode(t_node *pn){
+void addNode(t_node *pn,t_map map){
     int i = 0;
+    t_move *m = getRandomMoves(pn->nbSons);
     while( i < pn->nbSons){
-        pn->sons[i] = createNode(10,pn->nbSons-1,pn->depth+1);
-        i++;
+            t_localisation new_loc;
+            new_loc = translate(pn->loc,m[i]);
+            int val = map.costs[new_loc.pos.x][new_loc.pos.y];
+            pn->sons[i] = createNode(val,pn->nbSons-1,pn->depth+1,new_loc);
+            i++;
     }
 }
 
-t_tree createTree(int val){
+t_tree createTree(int pos_x,int pos_y,t_orientation ori,t_map map){
     t_tree t;
-    t.root = createNode(val,9,0);
+    int val = map.costs[pos_x][pos_y];
+    t.root = createNode(val,9,0, loc_init(pos_x,pos_y,ori));
     return t;
 }
 void displayTree(t_tree t){
