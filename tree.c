@@ -58,6 +58,15 @@ void displayNode(t_node *pn){
     }
 }
 
+void fillSons(t_node *pn,t_map map){
+    if(pn->nbSons !=0){
+        addNode(pn,map);
+        for(int i = 0;i < pn->nbSons ;i++){
+            addNode(pn->sons[i],map);
+        }
+    }
+}
+
 /**
  *
  * @param action
