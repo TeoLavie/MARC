@@ -10,6 +10,7 @@
 
 
 
+
 t_node *createNode(int val, int nb_sons, int depth,t_localisation loc)
 {
     ///Créer un noeud
