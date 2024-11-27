@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "moves.h"
 #include "map.h"
+#include "tree.h"
 /* prototypes of local functions */
 /* local functions are used only in this file, as helper functions */
 
@@ -185,3 +186,73 @@ t_move *getRandomMoves(int N)
 }
 
 
+int getValueInFront(t_localisation loc, t_map map) {
+    t_position pos_in_front = loc.pos;
+
+    if(loc.ori == NORTH){
+        pos_in_front.y -= 1;
+    }
+    else if(loc.ori == EAST){
+        pos_in_front.x += 1;
+    }
+    else if(loc.ori == SOUTH){
+        pos_in_front.y += 1;
+    }
+    else if(loc.ori == WEST){
+        pos_in_front.x -= 1;
+    }
+    else {
+        return -1;
+    }
+
+
+    // regarde si hors d la map
+    if (pos_in_front.x >= 0 && pos_in_front.x < map.x_max &&
+        pos_in_front.y >= 0 && pos_in_front.y < map.y_max) {
+        return map.costs[pos_in_front.y][pos_in_front.x];
+    }
+
+    // si hors -1
+    return -1;
+}
+
+
+
+// Ajouter la valeur du nœud actuel à la somme
+// Si c'est une feuille (pas d'enfants), vérifier si c'est optimal
+//  change best_sum si mieux
+//regarde les enfants du nœud courant
+
+void explorePaths(t_node *node, int current_sum, int *best_sum) {
+
+    if (node == NULL) {
+        return;
+    }
+
+    current_sum += node->value;
+
+
+    if (node->nbSons == 0) {
+        if (current_sum < *best_sum) {
+            *best_sum = current_sum;
+        }
+        return;
+    }
+
+
+    for (int i = 0; i < node->nbSons; i++) {
+        explorePaths(node->sons[i], current_sum, best_sum);
+    }
+}
+
+
+
+int findOptimalPath(t_tree *tree) {
+    if (tree == NULL || tree->root == NULL) {
+        return -1; // Si arbre vide
+    }
+
+    int best_sum = 100000;
+    explorePaths(tree->root, 0, &best_sum);
+    return best_sum;
+}
