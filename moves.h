@@ -7,6 +7,7 @@
 
 #include "loc.h"
 #include "map.h"
+#include "tree.h"
 
 /**
  * @brief Array of strings for the possible moves of the robot
@@ -51,7 +52,6 @@ t_localisation move(t_localisation, t_move);
  */
 void updateLocalisation(t_localisation *, t_move);
 int getValueInFront(t_localisation, t_map);
-t_move *getRandomMoves(int);
-t_localisation translate(t_localisation, t_move);
-
+void explorePaths(t_node *, int, int *);
+int findOptimalPath(t_tree *);
 #endif //UNTITLED1_MOVES_H
